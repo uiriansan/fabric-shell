@@ -1,0 +1,75 @@
+WARNING::17-04-2025 | 17:38:18 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:38:18 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:38:18 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:38:18 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:38:19 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `brightness-button`
+WARNING::17-04-2025 | 17:38:19 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `brightness-button`
+WARNING::17-04-2025 | 17:38:19 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `brightness-button`
+WARNING::17-04-2025 | 17:38:19 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `brightness-button`
+WARNING::17-04-2025 | 17:38:45 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:38:45 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:39:05 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:39:05 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:39:42 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `widgets+common_button+CommonButton`
+WARNING::17-04-2025 | 17:39:42 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:41:31 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `widgets+common_button+CommonButton`
+WARNING::17-04-2025 | 17:41:31 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:41:31 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `widgets+common_button+CommonButton`
+WARNING::17-04-2025 | 17:41:31 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:41:31 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `brightness-button`
+WARNING::17-04-2025 | 17:41:31 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `brightness-button`
+WARNING::17-04-2025 | 17:42:27 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `widgets+common_button+CommonButton`
+WARNING::17-04-2025 | 17:42:27 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:42:27 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `widgets+common_button+CommonButton`
+WARNING::17-04-2025 | 17:42:27 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:46:23 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `widgets+common_button+CommonButton`
+WARNING::17-04-2025 | 17:46:23 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:46:23 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `widgets+common_button+CommonButton`
+WARNING::17-04-2025 | 17:46:23 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:48:53 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `widgets+common_button+CommonButton`
+WARNING::17-04-2025 | 17:48:53 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:48:53 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `widgets+common_button+CommonButton`
+WARNING::17-04-2025 | 17:48:53 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:48:57 -> [WaylandWindow] showing an empty window is not recommended, some compositors might freak out.
+WARNING::17-04-2025 | 17:49:41 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `widgets+common_button+CommonButton`
+WARNING::17-04-2025 | 17:49:41 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:49:41 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `widgets+common_button+CommonButton`
+WARNING::17-04-2025 | 17:49:41 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:49:46 -> [WaylandWindow] showing an empty window is not recommended, some compositors might freak out.
+WARNING::17-04-2025 | 17:51:24 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `widgets+common_button+CommonButton`
+WARNING::17-04-2025 | 17:51:24 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:51:24 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `widgets+common_button+CommonButton`
+WARNING::17-04-2025 | 17:51:24 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+ERROR::17-04-2025 | 17:51:26 -> Could not create popover! Error: 'NoneType' object has no attribute 'connect'
+WARNING::17-04-2025 | 17:51:27 -> [WaylandWindow] showing an empty window is not recommended, some compositors might freak out.
+WARNING::17-04-2025 | 17:52:27 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `widgets+common_button+CommonButton`
+WARNING::17-04-2025 | 17:52:27 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 17:52:27 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `widgets+common_button+CommonButton`
+WARNING::17-04-2025 | 17:52:27 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 19:58:32 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `widgets+common_button+CommonButton`
+WARNING::17-04-2025 | 19:58:32 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 19:58:32 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `widgets+common_button+CommonButton`
+WARNING::17-04-2025 | 19:58:32 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 20:09:49 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+WARNING::17-04-2025 | 20:09:49 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `datetime`
+ERROR::17-04-2025 | 23:58:27 -> Could not create popover! Error: 'gi.repository.Gtk' object has no attribute 'Position'
+ERROR::18-04-2025 | 00:03:04 -> Could not create popover! Error: 'Scale' object has no attribute 'draw_value'
+ERROR::18-04-2025 | 00:13:13 -> Could not create popover! Error: <Gtk.Scale object at 0x7e7a6206ebc0 (GtkScale at 0x6116230f6a90)>: unknown signal name: on-button-release
+WARNING::18-04-2025 | 00:18:10 -> [Shell] Error loading plugin `brightness`: expression cannot contain assignment, perhaps you meant "=="? (plugin.py, line 28)
+ERROR::18-04-2025 | 12:00:15 -> Could not create popover! Error: Box.__init__() got multiple values for argument 'children'
+ERROR::18-04-2025 | 12:00:55 -> Could not create popover! Error: Box.__init__() got multiple values for argument 'children'
+ERROR::18-04-2025 | 12:01:43 -> Could not create popover! Error: Box.__init__() got multiple values for argument 'children'
+ERROR::18-04-2025 | 12:03:16 -> Could not create popover! Error: Box.__init__() got multiple values for argument 'children'
+ERROR::18-04-2025 | 12:03:17 -> Could not create popover! Error: Box.__init__() got multiple values for argument 'children'
+ERROR::18-04-2025 | 12:03:19 -> Could not create popover! Error: Box.__init__() got multiple values for argument 'children'
+ERROR::18-04-2025 | 12:07:21 -> Could not create popover! Error: Must be string, not int
+ERROR::18-04-2025 | 14:26:26 -> Could not create popover! Error: type object 'Orientation' has no attribute 'HORIZONTA'
+WARNING::19-04-2025 | 01:30:24 -> [Shell] Error initializing plugin `screen_filters`: 'FilterService' object has no attribute '_blue_light'
+WARNING::19-04-2025 | 01:30:24 -> [Shell] Failed to register toolbar widget for plugin `screen_filters`: 'FilterService' object has no attribute '_blue_light'
+WARNING::19-04-2025 | 01:30:24 -> [Shell] Failed to register toolbar widget for plugin `screen_filters`: 'FilterService' object has no attribute '_blue_light'
+WARNING::19-04-2025 | 01:31:22 -> [Shell] Failed to register toolbar widget for plugin `screen_filters`: __init__() should return None, not 'Box'
+WARNING::19-04-2025 | 01:31:22 -> [Shell] Failed to register toolbar widget for plugin `screen_filters`: __init__() should return None, not 'Box'
+WARNING::19-04-2025 | 01:37:08 -> [Shell] Failed to register toolbar widget for plugin `screen_filters`: argument widget: Expected Gtk.Widget, but got list
+WARNING::19-04-2025 | 01:37:08 -> [Shell] Failed to register toolbar widget for plugin `screen_filters`: argument widget: Expected Gtk.Widget, but got list
+WARNING::19-04-2025 | 01:37:30 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `screen-filters-button`
+WARNING::19-04-2025 | 01:37:30 -> `popover_factory` cannot be a lambda expression. Skipping popover for button `screen-filters-button`

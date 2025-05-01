@@ -46,7 +46,7 @@ class StatusBar(Window):
         self._main_monitor_id = main_monitor_id
 
         self.system_button = CommonButton(
-            icon="arch",
+            icon="launcher",
             title="Launcher",
             on_click=lambda: print("click"),
             r_popover_factory=get_power_menu_popover

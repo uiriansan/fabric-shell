@@ -3,7 +3,7 @@ from utils.widgets import setup_cursor_hover
 gi.require_version("Gtk", "3.0")
 import calendar
 import datetime
-from gi.repository import Gdk, Gtk
+from gi.repository import Gtk
 
 
 class Calendar(Gtk.Grid):

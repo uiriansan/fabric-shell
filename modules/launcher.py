@@ -1,8 +1,7 @@
-import operator
+import operator, gi
+gi.require_version("Gtk", "3.0")
 from collections.abc import Iterator
-
-import gi
-
+from typing import Callable, Dict, Tuple
 from fabric.utils import DesktopApp, get_desktop_applications, idle_add, remove_handler
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
@@ -11,9 +10,8 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
 from fabric.widgets.wayland import WaylandWindow as Window
+from utils.plugins import LauncherCommandType
 from widgets.tag_entry import TagEntry
-
-gi.require_version("Gtk", "3.0")
 
 class Launcher(Window):
     def __init__(self, **kwargs):
@@ -30,8 +28,12 @@ class Launcher(Window):
         self._arranger_handler: int = 0
         self._all_apps = get_desktop_applications()
 
+        self._commands = {}
+        self._command_handler = None
+
         self.viewport = Box(spacing=2, orientation="v")
         self.search_entry = Entry(
+            name="launcher-prompt",
             placeholder="Search Applications...",
             h_expand=True,
             notify_text=lambda entry, *_: self.arrange_viewport(entry.get_text()),
@@ -66,7 +68,7 @@ class Launcher(Window):
                             ),
                         ],
                     ),
-                    self.tag_entry,
+                    # self.tag_entry,
                     # the actual slots holder
                     self.scrolled_window,
                 ],
@@ -86,14 +88,26 @@ class Launcher(Window):
         self.viewport.children = []
 
         # make a new iterator containing the filtered apps
-        if query.startswith("whatever"):
-            # Icon
-            # Title
-            # ...
-            # action_factory (e.g. execute function or show widget inside launcher)
-            # LauncherAction (e.g. function to execute or widget to display)
-            print(query)
+        command = None
+        prompt = ""
+        try:
+            command, prompt = query.split(" ", 1)
+        except:
+            command = query
 
+        if len(command) > 0 and self._command_handler:
+            command_data: Tuple[LauncherCommandType, Callable] | None = None
+            if (command_data := self._command_handler(command)) is not None:
+                command_type, command_factory = command_data
+                result = command_factory(prompt)
+
+                if command_type == LauncherCommandType.SINGLE_ENTRY_COMMAND:
+                    print(result.title, result.label)
+                elif command_type == LauncherCommandType.LIST_COMMAND:
+                    ...
+                else:
+                    ...
+                return False
         filtered_apps_iter = iter(
             [
                 app
@@ -158,13 +172,20 @@ class Launcher(Window):
             **kwargs,
         )
 
-    # TODO: ...
-    def _connect(self): ...
+    def set_commands(self, commands: Dict):
+        self._commands = commands
+
+    def set_command_handler(self, command_handler: Callable):
+        self._command_handler = command_handler
 
     def toggle(self):
+        visible = self.get_visible()
+        if visible:
+            return self.set_visible(False)
+        self._all_apps = get_desktop_applications()
         self.search_entry.set_text(""),
         self.search_entry.grab_focus_without_selecting()
-        return self.set_visible(not self.get_visible())
+        return self.set_visible(True)
 
     def launch(self, command: str):
         self.search_entry.set_text(command)

@@ -2,8 +2,6 @@ import time
 from gi.repository import GLib
 from fabric.core.service import Property
 from fabric.utils.helpers import invoke_repeater
-from fabric.widgets.label import Label
-from utils.styling import int_to_ordinal
 from utils.widgets import setup_cursor_hover
 from widgets.calendar import Calendar
 from widgets.common_button import CommonButton

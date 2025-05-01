@@ -33,33 +33,47 @@ class Shell(Application):
 
         super().__init__(name, *status_bars, launcher, *windows)
 
+        self.set_stylesheet_from_file(get_relative_path("../styles/global.css"))
+
         self.status_bars = status_bars
         self.launcher = launcher
         self.context = ShellContext(self.status_bars, self.launcher)
 
         self.plugin_manager = PluginManager()
+        self.load_plugins()
 
+        self._connect_launcher()
+
+    def load_plugins(self):
         self.plugin_manager.get_plugins()
         self.plugin_manager.initialize_plugins(self.context)
-
-        self.set_stylesheet_from_file(get_relative_path("../styles/global.css"))
-
         # Create a reference of the plugins for each status bar. Not the best idea, but make plugins a lot easier to work with.
         # TODO: REALLY GOTTA FIX THIS
         for bar in self.status_bars:
             self._load_toolbar_widgets(bar)
 
-        self._connect_launcher()
+    def reload_plugins(self):
+        # Remove all plugins and its instances
+        self.plugin_manager.neutralize_plugins()
+        self.load_plugins()
+
+    def remove_children(self, box: Gtk.Box):
+        for child in box.get_children():
+            box.remove(child)
+            child.destroy()
 
     def _load_toolbar_widgets(self, bar):
         widgets = self.plugin_manager.get_toolbar_widgets()
         toolbar = bar.toolbar
+        # Remove all children in case we're reloading the plugins
+        self.remove_children(toolbar)
 
         for _, widget in widgets.items():
             toolbar.add_widget(widget)
 
     def _connect_launcher(self):
-        self.launcher._connect()
+        self.launcher.set_commands(self.plugin_manager.launcher_commands)
+        self.launcher.set_command_handler(self.plugin_manager.handle_launcher_command)
 
     def toggle_launcher(self):
         self.launcher.toggle()

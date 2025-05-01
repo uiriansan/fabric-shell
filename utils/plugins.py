@@ -1,20 +1,12 @@
-import abc
-
-import gi
+import abc, gi, os, sys, importlib.util
+gi.require_versions({"Gtk": "3.0"})
+from gi.repository import Gtk
 from loguru import logger
-
 from config import MAIN_MONITOR_ID, toolbar_plugin_order
 from fabric.utils import get_relative_path
-
+from typing import Any, List, Dict, Callable, Tuple
+from enum import Enum
 from modules.status_bar import StatusBar
-
-gi.require_versions({"Gtk": "3.0"})
-import importlib.util
-import os
-import sys
-from typing import Callable, Dict, List, Tuple
-
-from gi.repository import Gtk
 
 class ShellContext:
     """Provides plugins access to shell's components."""
@@ -41,20 +33,11 @@ class ShellContext:
 class Plugin(abc.ABC):
     """Base class for all plugins"""
 
-    _name: str | None = None
-    _description: str | None = None
+    @abc.abstractmethod
+    def plugin_name(self) -> str: ...
 
-    @property
-    def name(self):
-        if self._name is None:
-            raise NotImplementedError("Plugins must define _name")
-        return self._name
-
-    @property
-    def description(self):
-        if self._description is None:
-            raise NotImplementedError("Plugins must define _description")
-        return self._description
+    @abc.abstractmethod
+    def plugin_description(self) -> str: ...
 
     @abc.abstractmethod
     def initialize(self, shell_context: ShellContext) -> None: ...
@@ -73,6 +56,40 @@ class ToolbarPlugin(Plugin):
     @abc.abstractmethod
     def register_toolbar_widget(self) -> Gtk.Widget: ...
 
+class LauncherAction:
+    def __init__(self, name: str, keys: str, action: Callable, data: Tuple[Any, ...] | None = None):
+        self.name = name
+        self.keys = keys
+        self.action = action
+        self.data = data
+
+class LauncherCommandType(Enum):
+    SINGLE_ENTRY = 0
+    SINGLE_ENTRY_WITH_CONFIRMATION = 1
+    LIST = 2
+    LIST_WITH_CONFIRMATION = 3
+    WIDGET = 4
+    WIDGET_WITH_CONFIRMATION = 5
+
+class LauncherEntry:
+    def __init__(
+        self,
+        icon: str,
+        title: str,
+        description_label: str | None = None,
+        description_markup: str | None = None,
+        label: str | None = None,
+        actions: List[LauncherAction] | None = None
+    ):
+        if description_label is None and description_markup is None:
+            raise TypeError("LauncherEntries must provide either `description_label` or `description_markup`.")
+
+        self.icon = icon
+        self.title = title
+        self.description = description_markup if description_markup else description_label
+        self.label = label
+        self.actions = actions
+
 class LauncherPlugin(Plugin):
     """
         Interface for launcher plugins.
@@ -80,14 +97,14 @@ class LauncherPlugin(Plugin):
     """
 
     @abc.abstractmethod
-    def get_commands(self) -> List[str]: ...
+    def register_commands(self) -> List[str]: ...
 
     @abc.abstractmethod
-    def get_command_call(self, command: str) -> Dict[str, Callable]: ...
+    def run_command(self, command: str) -> Tuple[LauncherCommandType, Callable] | None: ...
 
-    @abc.abstractmethod
-    def get_actions(self) -> List[Tuple[str, str, Callable]]: ...
-
+    def tag_parser(self, prompt: str) -> Dict[str, str] | None:
+        # TODO:
+        ...
 
 class PluginManager:
     """Load and manages plugins"""
@@ -153,16 +170,16 @@ class PluginManager:
                     and attr not in (Plugin, ToolbarPlugin, LauncherPlugin)
                 ):
                     plugin_instance = attr()
-                    self.plugins[plugin_instance.name] = plugin_instance
+                    self.plugins[plugin_instance.plugin_name()] = plugin_instance
 
                     if isinstance(plugin_instance, ToolbarPlugin):
-                        self.toolbar_plugins[plugin_instance.name] = plugin_instance
+                        self.toolbar_plugins[plugin_instance.plugin_name()] = plugin_instance
 
                     if isinstance(plugin_instance, LauncherPlugin):
-                        self.launcher_plugins[plugin_instance.name] = plugin_instance
+                        self.launcher_plugins[plugin_instance.plugin_name()] = plugin_instance
 
-                        for command in plugin_instance.get_commands():
-                            self.launcher_commands[command] = plugin_instance.name
+                        for command in plugin_instance.register_commands():
+                            self.launcher_commands[command] = plugin_instance.plugin_name()
         finally:
             sys.path.pop(0)
 
@@ -173,9 +190,18 @@ class PluginManager:
                 plugin.initialize(shell_context)
                 loaded_plugins.append(name)
             except Exception as e:
-                logger.warning(f"[Shell] Error initializing plugin `{plugin.name}`: {e}")
+                logger.warning(f"[Shell] Error initializing plugin `{plugin.plugin_name()}`: {e}")
 
         logger.debug(f"[Shell] Loaded {len(loaded_plugins)} plugins: ({', '.join(loaded_plugins)})")
+
+    def neutralize_plugins(self):
+        # Remove all plugins
+        self.toolbar_plugins.clear()
+        self.launcher_plugins.clear()
+        self.launcher_commands.clear()
+        for name, plugin in self.plugins:
+            del plugin
+        self.plugins.clear()
 
     def get_toolbar_widgets(self) -> Dict[str, Gtk.Widget]:
         # Sort toolbar widgets to follow the order defined in config.py
@@ -200,3 +226,12 @@ class PluginManager:
                 )
 
         return widgets
+
+    def look_for_command(self, command: str):
+        ...
+
+    def handle_launcher_command(self, command: str) -> Tuple[LauncherCommandType, Callable] | None:
+        if command in self.launcher_commands:
+            plugin_name = self.launcher_commands[command]
+            plugin = self.launcher_plugins[plugin_name]
+            return plugin.run_command(command)

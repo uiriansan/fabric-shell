@@ -15,3 +15,7 @@ button.launcher-button:focus {
 button.launcher-button:focus label {
     color: var(--accent);
 }
+
+#launcher-prompt {
+    font-size: 12px;
+}

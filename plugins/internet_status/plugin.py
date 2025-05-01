@@ -7,13 +7,19 @@ from widgets.common_button import CommonButton
 
 class InternetStatus(ToolbarPlugin):
     def __init__(self):
-        self._name = "internet_status"
-        self._description = "Show internet status button."
+        self.name = "internet_status"
+        self.description = "Show internet status button."
 
         self.shell_context = None
 
         self.css_provider = Gtk.CssProvider()
         self.css_provider.load_from_path(get_relative_path("./styles.css"))
+
+    def plugin_name(self):
+        return self.name
+
+    def plugin_description(self):
+        return self.description
 
     def initialize(self, shell_context):
         self.shell_context = shell_context

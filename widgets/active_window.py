@@ -1,6 +1,5 @@
 import json
 import re
-
 from config import window_pattern_list, workspace_pattern_list
 from fabric.hyprland.service import HyprlandEvent
 from fabric.utils import bulk_connect
